@@ -26,6 +26,6 @@ get '/' do
 end
 
 get '/article' do
-  id = params[:id]
-  erb :article_template, :locals => {:article => articles[id.to_i]}
+  id = params[:id].to_i
+  erb :article_template, :locals => {:article => articles[id], :articles => articles}
 end

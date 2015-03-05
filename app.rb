@@ -21,16 +21,22 @@ articles = [
   }
 ]
 
-
 get '/' do
 
-  erb :home, :locals => {:articles => articles}
+  search = params[:search]
+
+  if search
+    erb :home, :locals => {:articles => articles.select {|article| article[:tag].include? search}}
+  else
+    erb :home, :locals => {:articles => articles}
+  end
 
 end
+
 
 get '/article' do
 
   id = params[:id].to_i
-  erb :article_template, :locals => {:article => articles[id], :articles => articles}
+  erb :article_template, :locals => {:article => articles[id], :articles => articles,}
 
 end

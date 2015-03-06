@@ -63,7 +63,7 @@ articles = [
   },
   {
     tag: "happy, love, time",
-    title: "What I all want",
+    title: "What we all want",
     date: "18/02/1984",
     content: "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam ex ligula, vestibulum et nibh eget, placerat consectetur ipsum. Nulla fringilla eleifend turpis, dictum posuere erat viverra id. Suspendisse ac nulla at justo accumsan pretium. Duis nec rutrum odio, eu imperdiet sapien. Vestibulum commodo, odio et lobortis aliquam, massa orci laoreet tellus, nec faucibus dui enim vitae mauris. Sed ut sem convallis, tempor erat non, faucibus neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut dapibus dictum nulla, at tincidunt mi condimentum sit amet.",
   },

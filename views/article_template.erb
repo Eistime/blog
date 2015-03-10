@@ -7,7 +7,7 @@
           <h1><%= article[:title] %></h1>
           <p><%= article[:date] %></p>
           <p><%= article[:content] %></p>
-          <a href="/">Home</a>
+          <a href="/?page=1">Home</a>
 
           <% articles.each_with_index do |other_article, index| %>
             <% if article[:title] != other_article[:title] %>

@@ -14,19 +14,19 @@ articles = [
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum magna quis nisi sagittis sollicitudin. Phasellus vel urna accumsan libero commodo hendrerit sed et orci. Duis libero tortor, aliquam eu egestas eu, porta et diam. Nunc tincidunt scelerisque mauris, vitae ullamcorper diam luctus vel. Nam suscipit condimentum justo quis congue. Nullam lobortis mattis diam ac viverra. Nunc lobortis augue eu augue pretium, non dapibus purus tristique. Mauris aliquet ante in turpis posuere, sit amet varius leo luctus. Donec nec ipsum urna. Duis fermentum eros pulvinar lorem varius, id fringilla diam convallis. Vivamus eu lacus eros. Aliquam malesuada sem in diam pharetra rutrum. Curabitur sollicitudin eget elit at tempor. Pellentesque ac tellus in nulla viverra accumsan.",
   },
   {
-    tag: "convention, london, tattoo",
+    tag: "convention, london, tattoo, cool",
     title: "International Tattoo Convention, London",
     date: "10/09/2014",
     content: "Mauris a libero urna. Fusce congue sodales lacinia. Duis convallis diam quam, eu sodales libero varius eget. Mauris convallis libero sem, et pellentesque urna maximus eu. Mauris et metus nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent quis luctus metus. Nam imperdiet felis a aliquam aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quam nibh, aliquet ac augue eu, sagittis suscipit justo.",
   },
   {
-    tag: "finland, holidays, interail",
+    tag: "finland, holidays, interail, cool",
     title: "Interrail trip, Finland",
     date: "10/09/2014",
     content: "Phasellus fermentum molestie mi non elementum. Sed accumsan, quam at iaculis volutpat, justo lectus placerat nisi, et efficitur ex ipsum eu felis. Duis ultricies porttitor lorem dapibus sodales. Donec sapien purus, fringilla congue est eget, convallis pharetra est. Integer tincidunt cursus arcu, eget molestie est consequat tempus. Vestibulum ullamcorper eros scelerisque iaculis condimentum. Curabitur mattis tincidunt massa, quis facilisis mauris condimentum eget. Cras lorem nisi, vehicula vel cursus vitae, consequat id magna. Sed faucibus a dui at ornare.",
   },
   {
-    tag: "gaming, hobbies, fun",
+    tag: "gaming, hobbies, fun, cool",
     title: "The old good times @lan",
     date: "14/09/2012",
     content: "Nulla molestie purus et purus commodo blandit. Integer at nisi tortor. Integer ut est finibus, semper elit eu, consequat ipsum. Nulla dignissim aliquet orci in semper. Suspendisse porta est eros, eget tempor dui faucibus vel. Integer sit amet felis leo. Suspendisse lacinia odio et enim pharetra interdum. Donec posuere egestas purus. Morbi mollis non ante fringilla semper. Nunc augue sem, iaculis tristique turpis ac, aliquam finibus eros. Ut at dictum metus, vitae eleifend mauris. Duis rutrum, lectus eu porta mollis, elit justo bibendum nulla, eu viverra eros arcu ac odio. Morbi nec rhoncus tortor. Morbi elementum pellentesque eleifend. Vestibulum porttitor diam non odio ultrices, eu iaculis ipsum dictum.",
@@ -39,7 +39,7 @@ articles = [
   },
   {
     tag: "cat, dog, animals",
-    title: "Pets, good a bad",
+    title: "Pets, good and bad",
     date: "01/09/2014",
     content: "Etiam dignissim ornare erat vel malesuada. Praesent posuere eu urna a ornare. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla eu tincidunt mi. Nulla ipsum nibh, fermentum eu urna sed, ultricies suscipit est. Mauris a turpis ligula. Duis urna lorem, egestas at ante sit amet, fermentum porttitor ligula. Nullam tempor elit ac aliquet ornare. Nullam at tellus feugiat, fermentum nunc cursus, fringilla velit. In id tristique nisl, ac rhoncus ligula. Donec varius orci eu magna scelerisque, quis imperdiet turpis consectetur. Phasellus auctor blandit mauris ac porta. Nulla vel nulla sit amet nulla congue vestibulum. Aenean vestibulum metus libero, at hendrerit arcu iaculis quis. Vestibulum justo massa, dapibus nec libero mollis, suscipit venenatis sapien. Nulla facilisi.",
   },
@@ -82,18 +82,48 @@ articles = [
 ]
 
 get '/' do
+  filtered_articles = filter_articles params[:search], articles
 
-  search = params[:search]
+  page = (params[:page] || 1).to_i
 
-  if search then erb :home, :locals => {:articles => articles.select {|article| article[:tag].include? search}}
-  else erb :home, :locals => {:articles => articles}
+  articles_per_page = 3
+  last_article = page * articles_per_page - 1
+  first_article = (page - 1) * articles_per_page
+  amount_of_pages = amount_of_pages_calc filtered_articles.length, articles_per_page
+
+  if last_article > filtered_articles.length - 1
+    last_article = filtered_articles.length - 1
   end
+
+  page_articles = articles.values_at(first_article..last_article)
+
+  erb :home, :locals => {
+                         :articles => page_articles,
+                         :amount_of_pages => amount_of_pages
+                        }
+
+end
+
+def amount_of_pages_calc amount_of_articles, articles_per_page
+  (amount_of_articles / articles_per_page.to_f).ceil
+end
+
+def filter_articles search, articles
+
+  if search
+    return articles.select {|article| article[:tag].include? search}
+  end
+
+  articles
 end
 
 
 get '/article' do
 
   id = params[:id].to_i
-  erb :article_template, :locals => {:article => articles[id], :articles => articles,}
+  erb :article_template, :locals => {
+                                     :article => articles[id],
+                                     :articles => articles
+                                    }
 
 end

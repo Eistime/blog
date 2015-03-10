@@ -13,5 +13,15 @@
         </li>
       <% end %>
     </ul>
+    <ul>
+      <%
+      page_numbers = [*1..amount_of_pages]
+      page_numbers.each do |page_number|
+      %>
+      <li>
+        <a href="/?page=<%= page_number %>"><%= page_number %></a>
+      </li>
+      <% end %>
+    </ul>
   </body>
 </html>

@@ -98,8 +98,9 @@ get '/' do
   page_articles = articles.values_at(first_article..last_article)
 
   erb :home, :locals => {
-                         :articles => page_articles,
-                         :amount_of_pages => amount_of_pages
+                          :page => page,
+                          :articles => page_articles,
+                          :amount_of_pages => amount_of_pages
                         }
 
 end

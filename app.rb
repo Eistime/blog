@@ -85,6 +85,7 @@ get '/' do
   filtered_articles = filter_articles params[:search], articles
 
   page = (params[:page] || 1).to_i
+  search = params[:search]
 
   articles_per_page = 3
   last_article = page * articles_per_page - 1
@@ -98,6 +99,7 @@ get '/' do
   page_articles = articles.values_at(first_article..last_article)
 
   erb :home, :locals => {
+                          :search => search,
                           :page => page,
                           :articles => page_articles,
                           :amount_of_pages => amount_of_pages

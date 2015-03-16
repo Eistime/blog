@@ -9,12 +9,12 @@
           <h1><%= article[:title] %></h1>
           <p><%= article[:date] %></p>
           <p><%= article[:content] %></p>
-          <a href="/article?id=<%=index%>">Read more about <%= article[:title] %></a>
+          <a href="/article?id=<%=index%>&search=<%= search %>">Read more about <%= article[:title] %></a>
         </li>
       <% end %>
     </ul>
     <% if page > 1 %>
-    <a href="/?page=<%= page - 1 %>">previous</a>
+    <a href="/?page=<%= page - 1 %>&search=<%= search %>">previous</a>
     <% end %>
     <ul>
       <%
@@ -22,12 +22,13 @@
       page_numbers.each do |page_number|
       %>
       <li>
-        <a href="/?page=<%= page_number %>"><%= page_number %></a>
+        <a href="/?page=<%= page_number %>&search=<%= search %>"><%= page_number %></a>
       </li>
       <% end %>
     </ul>
     <% if page < amount_of_pages %>
-    <a href="/?page=<%= page + 1 %>">next</a>
+    <a href="/?page=<%= page + 1 %>&search=<%= search %>">next</a>
     <% end %>
+    <a href="/?page=1&search=">home</a>
   </body>
 </html>

@@ -8,13 +8,5 @@
           <p><%= article[:date] %></p>
           <p><%= article[:content] %></p>
           <a href="/?page=1">Home</a>
-
-          <% articles.each_with_index do |other_article, index| %>
-            <% if article[:title] != other_article[:title] %>
-              <li>
-                <a href="/article?id=<%=index%>">Read also: <%= other_article[:title] %></a>
-              </li>
-            <% end %>
-          <% end %>
   </body>
 </html>

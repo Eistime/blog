@@ -7,13 +7,15 @@
 
   </head>
   <body>
+    <form id="form_input">
+      <input id='input' type="text">
+      <input value="add to list" type="submit">
+    </form>
 
-    <div id="top_menu">
-      <div class="wrapper">
-        <a id="test" href="/?page=1&search=">home</a>
-      </div>
-    </div>
+    <ul id="list">
+    </ul>
 
+        <a href="/?page=1&search=">home</a>
     <ul>
       <% articles.each_with_index do |article, index| %>
         <li>
@@ -41,4 +43,18 @@
     <a href="/?page=<%= page + 1 %>&search=<%= search %>">next</a>
     <% end %>
   </body>
+
+  <script>
+
+
+  $(document).ready(function() {
+      $("#form_input").on('submit', function(e){
+          e.preventDefault();
+          var item_to_add = $('#input').val();
+          $('#list').append('<li>'+ item_to_add +'</li>');
+      });
+  });
+
+  </script>
+
 </html>

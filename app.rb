@@ -112,7 +112,6 @@ def amount_of_pages_calc amount_of_articles, articles_per_page
 end
 
 def filter_articles search, articles
-
   if search
     return articles.select {|article| article[:tag].include? search}
   end
@@ -122,11 +121,9 @@ end
 
 
 get '/article' do
-
   id = params[:id].to_i
   erb :article_template, :locals => {
                                      :article => articles[id],
                                      :articles => articles
                                     }
-
 end

@@ -8,7 +8,14 @@
   </head>
   <body>
     <form id="form_input">
-      <input id='input' type="text">
+      Title:<br>
+      <input id='title_input' type="text">
+      <br>
+      Date:<br>
+      <input id='date_input' type="text">
+      <br>
+      Content:<br>
+      <input id='content_input' type="text">
       <input value="add to list" type="submit">
     </form>
 
@@ -50,8 +57,14 @@
   $(document).ready(function() {
       $("#form_input").on('submit', function(e){
           e.preventDefault();
-          var item_to_add = $('#input').val();
-          $('#list').append('<li>'+ item_to_add +'</li>');
+          var title = $('#title_input').val();
+          var date = $('#date_input').val();
+          var content = $('#content_input').val();
+          $('#list').append('<li>'
+                                  +'<h1>'+ title +'</h1>'
+                                  +'<p>'+ date +'</p>'
+                                  +'<p>'+ content +'</p>'
+                            +'</li>');
       });
   });
 

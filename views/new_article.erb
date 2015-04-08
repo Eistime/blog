@@ -1,0 +1,52 @@
+<html>
+  <head>
+
+    <script src="jquery.js" type="text/javascript"></script>
+
+    <title>new article</title>
+
+  </head>
+
+  <body>
+
+    <a href="/?page=1&search=">home</a>
+
+    <BR>&nbsp;<BR>
+          
+    <form id="form_input">
+      Title:<br>
+      <input id='title_input' type="text">
+      <br>
+      Date:<br>
+      <input id='date_input' type="text">
+      <br>
+      Content:<br>
+      <input id='content_input' type="text">
+      <input value="add to list" type="submit">
+    </form>
+
+    <ul id="list">
+    </ul>
+
+    <script>
+
+    $(document).ready(function() {
+        $("#form_input").on('submit', function(e){
+            e.preventDefault();
+            var title = $('#title_input').val();
+            var date = $('#date_input').val();
+            var content = $('#content_input').val();
+            $('#list').append('<li>'
+                                    +'<h1>'+ title +'</h1>'
+                                    +'<p>'+ date +'</p>'
+                                    +'<p>'+ content +'</p>'
+                              +'</li>');
+
+          $('input[type="text"]').val();
+        });
+    });
+
+    </script>
+
+  </body>
+</html>

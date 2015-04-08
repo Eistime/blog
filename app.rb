@@ -127,3 +127,9 @@ get '/article' do
                                      :articles => articles
                                     }
 end
+
+get '/new' do
+
+  erb :new_article
+  
+end

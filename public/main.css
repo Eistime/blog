@@ -1,0 +1,13 @@
+* {
+	border: 0px;
+	margin: 0px;
+}
+
+#slideshow {
+  position: relative;
+  padding-bottom: 150px;
+}
+
+.image {
+  position: absolute;
+}

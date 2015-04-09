@@ -131,5 +131,11 @@ end
 get '/new' do
 
   erb :new_article
-  
+
+end
+
+get '/slideshow' do
+
+  erb :slideshow
+
 end

@@ -1,0 +1,51 @@
+<html>
+  <head>
+
+    <link rel="stylesheet" type="text/css" href="/main.css">
+
+    <script src="jquery.js" type="text/javascript"></script>
+
+    <title>Slideshow</title>
+
+  </head>
+  <body>
+
+
+    <div id="slideshow">
+      <img class="image" src="/images/cosmos.jpeg"/>
+      <img class="image" src="/images/cubes.jpeg"/>
+      <img class="image" src="/images/sunset.jpeg"/>
+    </div>
+
+    <a class="button" href="/?page=1">Home</a>
+
+  </body>
+
+  <script>
+
+  var items = $('#slideshow .image');
+  var item = items.first();
+
+  function cycle() {
+
+    item.fadeOut( 300 );
+
+    item = item.next();
+
+    if ( !item || !item.length ) {
+      item = items.first();
+    }
+
+    item.fadeIn( 300, function() {
+        setTimeout( cycle, 150 );
+    });
+
+  }
+
+  item.show();
+  setTimeout( cycle, 200 );
+
+
+  </script>
+
+</html>

@@ -10,42 +10,33 @@
   </head>
   <body>
 
-
-    <div id="slideshow">
-      <img class="image" src="/images/cosmos.jpeg"/>
-      <img class="image" src="/images/cubes.jpeg"/>
-      <img class="image" src="/images/sunset.jpeg"/>
-    </div>
-
     <a class="button" href="/?page=1">Home</a>
+
+    <ul id="slideshow">
+      <li><img src="/images/cosmos.jpeg"/></li>
+      <li><img src="/images/cubes.jpeg"/></li>
+      <li><img src="/images/sunset.jpeg"/></li>
+    </ul>
+
 
   </body>
 
-  <script>
-
-  var items = $('#slideshow .image');
-  var item = items.first();
-
-  function cycle() {
-
-    item.fadeOut( 300 );
-
-    item = item.next();
-
-    if ( !item || !item.length ) {
-      item = items.first();
-    }
-
-    item.fadeIn( 300, function() {
-        setTimeout( cycle, 150 );
-    });
-
-  }
-
-  item.show();
-  setTimeout( cycle, 200 );
-
-
-  </script>
-
 </html>
+
+<Script>
+
+  var count = 0
+
+ $("#slideshow li").hide(); $( $("#slideshow li")[0]).show();
+
+  setInterval(function(){
+
+    $("#slideshow li").hide();
+    $( $("#slideshow li")[count]).show();
+    count++
+    if (count == 3) {
+      count = 0
+    }
+  }, 3000);
+
+</Script>
